@@ -19,7 +19,7 @@ $array = json_decode($file, true);
 if ($array['_status_']['status'] == 'ok') {
     foreach ($array['reports'] as $report) {
         if ($report['url']['ip']['cc'] == 'PL' || preg_match('#paypal#i', $report['url']['addr'])) { // change me
-            //echo $report['report_id'] . "\n";
+            //echo $report['report_id'] . PHP_EOL;
             var_dump($report);
         }
     }
