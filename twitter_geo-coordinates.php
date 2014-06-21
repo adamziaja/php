@@ -6,6 +6,8 @@
  * Collecting GPS positions from the user's Twitter profile.
  * Example of use:
  * php twitter_geo-coordinates.php username > /tmp/test.html && firefox /tmp/test.html
+ * Example output:
+ * https://i.imgur.com/C4UTBwD.png
  */
 
 if (count($argv) > 1) {
