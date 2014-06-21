@@ -37,8 +37,6 @@ $tweets = $connection->get("https://api.twitter.com/1.1/statuses/user_timeline.j
 if (!isset($tweets->errors) && !isset($tweets->error)) {
     echo '<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html;charset=utf-8"></head><body style="font: 12px Verdana, Geneva, sans-serif">' . PHP_EOL;
     foreach ($tweets as $tweet) {
-        //var_dump($tweet);
-        //die();
         if (isset($tweet->geo)) {
             echo '<p>' . PHP_EOL . date('Y-m-d H:i:s', strtotime($tweet->created_at)) . ' (' . date_default_timezone_get() . ')<br>' . PHP_EOL;
             echo '<a href="https://twitter.com/' . $tweet->user->screen_name . '/status/' . $tweet->id_str . '" target="_blank">' . $tweet->user->screen_name . '</a><br>' . PHP_EOL;
