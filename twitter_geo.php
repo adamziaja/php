@@ -5,7 +5,7 @@
  * 
  * Collecting GPS positions from the user's Twitter profile.
  * Example of use:
- * php geo.php username > /tmp/test.html && firefox /tmp/test.html
+ * php twitter_geo.php username > /tmp/test.html && firefox /tmp/test.html
  */
 
 if (count($argv) > 1) {
