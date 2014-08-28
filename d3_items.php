@@ -32,28 +32,16 @@ function msort($array, $key, $sort_flags = SORT_REGULAR) // (C) http://blog.jach
 }
 
 $array = json_decode(file_get_contents('https://eu.battle.net/api/d3/profile/adam-21870/hero/46580866'), true);
-
 $stack = array();
+$last  = NULL;
+$sum   = NULL;
 
-//var_dump($array['items']);
 foreach ($array['items'] as $items) {
-    //var_dump($items['tooltipParams']);
     $item = json_decode(file_get_contents('https://eu.battle.net/api/d3/data/' . $items['tooltipParams']), true);
-    //var_dump($item);
-    echo '#' . $item['name'] . PHP_EOL;
-    //var_dump($item['attributesRaw']);
     foreach ($item['attributesRaw'] as $name => $attribute) {
-        echo $name . ' ';
         if ($attribute['min'] == $attribute['max']) {
-            if (preg_match('/Percent/', $name)) {
-                echo ($attribute['max'] * 100) . '%' . PHP_EOL;
-                $data = ($attribute['max'] * 100) . '%';
-            } else {
-                echo $attribute['max'] . PHP_EOL;
-                $data = $attribute['max'];
-            }
+            $data = $attribute['max'];
         } else {
-            echo $attribute['min'] . '-' . $attribute['max'] . PHP_EOL;
             $data = $attribute['min'] . '-' . $attribute['max'];
         }
         array_push($stack, array(
@@ -64,14 +52,10 @@ foreach ($array['items'] as $items) {
     }
     
     foreach ($item['gems'] as $gem) {
-        echo '@' . $gem['item']['id'] . PHP_EOL;
         foreach ($gem['attributesRaw'] as $name => $attribute) {
-            echo $name . ' ';
             if ($attribute['min'] == $attribute['max']) {
-                echo $attribute['max'] . PHP_EOL;
                 $data = $attribute['max'];
             } else {
-                echo $attribute['min'] . '-' . $attribute['max'] . PHP_EOL;
                 $data = $attribute['min'] . '-' . $attribute['max'];
             }
         }
@@ -81,12 +65,39 @@ foreach ($array['items'] as $items) {
             $data
         ));
     }
-    
-    echo PHP_EOL;
 }
 
-$stack = msort($stack, 1);
+$stack = msort($stack, array(
+    1,
+    0
+));
 
-var_dump($stack);
+foreach ($stack as $item) {
+    if ($item[1] != $last && !is_null($sum)) {
+        if (preg_match('/Percent/', $last) || preg_match('/Chance/', $last) || preg_match('/Gold_Find/', $last)) {
+            echo ($sum * 100) . '%' . PHP_EOL;
+        } else {
+            echo $sum . PHP_EOL;
+        }
+        echo PHP_EOL;
+    }
+    
+    if ($item[1] != $last) {
+        echo '#' . $item[1] . PHP_EOL;
+    }
+    
+    if (preg_match('/Percent/', $item[1]) || preg_match('/Chance/', $item[1]) || preg_match('/Gold_Find/', $item[1])) {
+        echo ($item[2] * 100) . '% ' . $item[0] . PHP_EOL;
+    } else {
+        echo $item[2] . ' ' . $item[0] . PHP_EOL;
+    }
+    
+    if ($item[1] != $last) {
+        $sum = NULL;
+    }
+    
+    $sum  = $sum + $item[2];
+    $last = $item[1];
+}
 
 ?>
