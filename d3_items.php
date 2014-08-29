@@ -4,7 +4,7 @@
 // (C) 2014 Adam Ziaja <adam@adamziaja.com> http://adamziaja.com
 
 function msort($array, $key, $sort_flags = SORT_REGULAR) // (C) http://blog.jachim.be/2009/09/php-msort-multidimensional-array-sort/comment-page-1/
-{
+    {
     if (is_array($array) && count($array) > 0) {
         if (!empty($key)) {
             $mapping = array();
@@ -98,6 +98,12 @@ foreach ($stack as $item) {
     
     $sum  = $sum + $item[2];
     $last = $item[1];
+}
+
+if (preg_match('/Percent/', $last) || preg_match('/Chance/', $last) || preg_match('/Gold_Find/', $last)) {
+    echo ($sum * 100) . '%' . PHP_EOL;
+} else {
+    echo $sum . PHP_EOL;
 }
 
 ?>
