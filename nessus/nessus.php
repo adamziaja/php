@@ -65,6 +65,7 @@
 
 //error_reporting(-1);
 //ini_set('display_errors', 'On');
+//date_default_timezone_set('Europe/Warsaw');
 
 if (empty($_GET['i']) && empty($_GET['x'])) {
     foreach (scandir('/tmp', 1) as $file) {
@@ -130,7 +131,6 @@ if (!empty($_GET['x'])) {
 }
 
 if (!empty($_GET['x']) && file_exists('/tmp/' . $xml . '.nessus')) {
-//date_default_timezone_set('Europe/London');
     $nessus = simplexml_load_file('/tmp/' . $xml . '.nessus') or die(); // *.nessus
     $affected = '#[AffectedHosts]#' . PHP_EOL;
     $stack = array();
