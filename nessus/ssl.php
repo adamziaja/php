@@ -66,7 +66,7 @@
 
         //error_reporting(-1);
         //ini_set('display_errors', 'On');
-        //date_default_timezone_set('Europe/London');
+        //date_default_timezone_set('Europe/Warsaw');
 
         if (empty($_GET['i']) && empty($_GET['x'])) {
             foreach (scandir('/tmp', 1) as $file) {
