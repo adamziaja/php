@@ -1,0 +1,13 @@
+php_value date.timezone "Europe/Warsaw"
+
+<Files *~*>
+Order Allow,Deny
+Deny from all
+</Files>
+
+<Files twitter.php>
+Order Allow,Deny
+Deny from all
+</Files>
+
+Options -Indexes
