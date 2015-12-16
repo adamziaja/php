@@ -38,7 +38,7 @@
             $filestack = array();
             $dirstack = array();
 
-            foreach (new DirectoryIterator('./' . $dir) as $file) {
+            foreach (new DirectoryIterator($_SERVER['DOCUMENT_ROOT'] . '/' . $dir) as $file) {
                 if (!$file->isDot()) {
                     if ($file->isFile()) {
                         array_push($filestack, $file->getFilename());
