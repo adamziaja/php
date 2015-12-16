@@ -14,10 +14,10 @@
                 font-weight: normal;
             }
             .dir {
-                background-color: #99CCFF !important;
+                background-color: #99CCFF;
             }
             .file {
-                background-color: #FFCC66 !important;
+                background-color: #FFCC66;
             }
         </style>
     </head> 
