@@ -1,7 +1,5 @@
-<pre>
 <?php
-if(strlen($_GET['a'])>1){
-  $path = NULL;
-	echo htmlspecialchars(file_get_contents($path.$_GET['a'])) . PHP_EOL;
-} ?>
-</pre>
+if(isset($_GET['a'])){
+    echo highlight_string(file_get_contents($_SERVER['DOCUMENT_ROOT'].'/'.$_GET['a'])) . PHP_EOL;
+}
+?>
