@@ -16,7 +16,7 @@ for ($i = 0; $i < $items->length; $i++) {
     if (preg_match('/***A-VALUE***/i', $items->item($i)->nodeValue)) {
         $url = $items->item($i)->getAttribute('href');
         header("Location: $url", true, 302);
-        echo "<a href='$url'>" . $url . '</a>' . PHP_EOL;
+        echo "<a href='$url' rel='noreferrer'>" . $url . '</a>' . PHP_EOL;
     }
 }
 ?>
