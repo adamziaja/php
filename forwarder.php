@@ -7,7 +7,7 @@
 3. check for first link that have regexp value
 4. forward to a:href url
 */
-ini_set('user_agent', 'Opera/9.80 (Windows NT 6.1; U; Edition Campaign 21; en-GB) Presto/2.7.62 Version/11.00');
+ini_set('user_agent', 'Googlebot/2.1 (+http://www.googlebot.com/bot.html)');
 $str = file_get_contents('http://***URL***');
 $DOM = new DOMDocument;
 @$DOM->loadHTML($str);
